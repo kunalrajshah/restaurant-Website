@@ -9,7 +9,7 @@ const HeaderCartButton = (props) => {
       <span>Add to Cart</span>
       <span className={classes.badge}>3</span>
     </button>
-  )
+  );
 }
 
 export default HeaderCartButton;
