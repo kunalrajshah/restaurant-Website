@@ -18,3 +18,10 @@
   background-color: #641e03;
   border-color: #641e03;
 }
+
+.form input{
+  width: 33px;
+  border-radius: 8%;
+  padding: 3%;
+  border: 1px solid black;
+}

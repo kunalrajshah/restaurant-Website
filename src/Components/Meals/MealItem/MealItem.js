@@ -1,5 +1,6 @@
 import React from 'react';
 import Classes from './MealItem.module.css';
+import MealItemForm from './MealItemForm';
 
 const MealItem = (props) => {
   const setPrice=`$${props.price.toFixed(2)}` //Set $ sign before price.
@@ -11,7 +12,7 @@ const MealItem = (props) => {
         <div className={Classes.price}>{setPrice}</div>
       </div>
       <div>
-        
+        <MealItemForm />
       </div>
     </li>
   )
