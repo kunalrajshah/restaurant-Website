@@ -5,12 +5,12 @@ import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 
 
-const Header = () => {
+const Header = (props) => {
   return (
     <Fragment>
       <header className={classes.header}>
         <h1>Meals Available</h1>
-        <HeaderCartButton />
+        <HeaderCartButton  onclk={props.onclk}  />
       </header>
       <div className={classes['main-image']}>
         <img src={mealsImg} alt="A table full of dish" />
