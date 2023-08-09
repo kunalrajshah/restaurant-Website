@@ -4,6 +4,8 @@ import Input from "../../UI/Input";
 import CartContext from "../../../Store/Cart-Context";
 
 const MealItemForm = (props) => {
+
+  // For adding Quantity
   const ctxt = useContext(CartContext);
   const addItemToCart = (event) => {
     event.preventDefault();
@@ -19,8 +21,7 @@ const MealItemForm = (props) => {
           id: "Amount_" + props.id,
           type: "number",
           min: "1",
-          max: "5",
-          step: "1",
+          step:"1",
           defaultValue: "1",
         }}
       />

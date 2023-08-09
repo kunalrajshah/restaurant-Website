@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import CartContext from "../../Store/Cart-Context";
@@ -9,46 +9,64 @@ const Cart = (props) => {
 
   const hasItem = ctxt.items.length > 0;
 
-  // For adding total price
-  let totalPrice = 0;
-  ctxt.items.forEach((item) => {
-    totalPrice += item.price;
-  });
-
-  const totalAmount = `$${totalPrice.toFixed(2)}`;
-
   // For combined together of the same List
   function groupItemsById(items) {
     const groupedItems = {};
 
     items.forEach((item) => {
       if (!groupedItems[item.id]) {
-        groupedItems[item.id] = { ...item, quantity: +item.Quantity };
+        groupedItems[item.id] = { ...item, Quantity: +item.Quantity };
       } else {
-        groupedItems[item.id].quantity += +item.Quantity;
+        groupedItems[item.id].Quantity += +item.Quantity;
       }
     });
+    // The Object.values() static method returns an array of a given object.
     return Object.values(groupedItems);
   }
 
   // For AAdding and Removing Cart Items on CLick button(-,+).
-  const CartItemRemoveHandler=()=>{};
-  const CartItemAddHandler=()=>{};
+  const [cartItem, setCartItem] = useState(groupItemsById(ctxt.items));
+  const CartItemRemoveHandler = (ItemId) => {
+    // Find the item with the matching ID in the cart
+    const updatedCart = cartItem.map((item) =>
+      item.id === ItemId ? { ...item, Quantity: item.Quantity - 1 } : item
+    );
+    setCartItem(updatedCart.filter((item)=>item.Quantity >0));
+  };
+
+  const CartItemAddHandler = (ItemId) => {
+    // Find the item with the matching ID in the cart
+    const updatedCart = cartItem.map((item) =>
+      item.id === ItemId ? { ...item, Quantity: item.Quantity + 1 } : item
+    );
+    setCartItem(updatedCart);
+  };
+
+  // For adding total price
+  let newAmount = 0;
+  groupItemsById(ctxt.items).forEach((item) => {
+    newAmount = newAmount + item.price * item.Quantity;
+  });
+  const totalAmount = `$${newAmount.toFixed(2)}`;
 
   const cartItems = (
     <ul className={Classes["cart-items"]}>
-      {groupItemsById(ctxt.items).map((groupedItems) => (
+      {cartItem.map((groupedItems) => (
         <li className={Classess["cart-item"]} key={groupedItems.id}>
           <div>
             <h2>{groupedItems.name}</h2>
             <div className={Classess.summary}>
               <span className={Classess.price}>{groupedItems.price}</span>
-              <span className={Classess.amount}>x {groupedItems.quantity}</span>
+              <span className={Classess.amount}>x {groupedItems.Quantity}</span>
             </div>
           </div>
           <div className={Classess.actions}>
-            <button onClick={CartItemRemoveHandler}>−</button>
-            <button onClick={CartItemAddHandler}>+</button>
+            <button onClick={() => CartItemRemoveHandler(groupedItems.id)}>
+              -
+            </button>
+            <button onClick={() => CartItemAddHandler(groupedItems.id)}>
+              +
+            </button>
           </div>
         </li>
       ))}
