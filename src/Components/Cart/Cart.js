@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import Classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import CartContext from "../../Store/Cart-Context";
@@ -25,33 +25,24 @@ const Cart = (props) => {
   }
 
   // For AAdding and Removing Cart Items on CLick button(-,+).
-  const [cartItem, setCartItem] = useState(groupItemsById(ctxt.items));
   const CartItemRemoveHandler = (ItemId) => {
-    // Find the item with the matching ID in the cart
-    const updatedCart = cartItem.map((item) =>
-      item.id === ItemId ? { ...item, Quantity: item.Quantity - 1 } : item
-    );
-    setCartItem(updatedCart.filter((item)=>item.Quantity >0));
+    ctxt.removeItem(ItemId);
   };
 
   const CartItemAddHandler = (ItemId) => {
-    // Find the item with the matching ID in the cart
-    const updatedCart = cartItem.map((item) =>
-      item.id === ItemId ? { ...item, Quantity: item.Quantity + 1 } : item
-    );
-    setCartItem(updatedCart);
+    ctxt.addItemOnIncrement(ItemId);
   };
 
   // For adding total price
   let newAmount = 0;
-  cartItem.forEach((item) => {
+  ctxt.items.forEach((item) => {
     newAmount = newAmount + item.price * item.Quantity;
   });
   const totalAmount = `$${newAmount.toFixed(2)}`;
 
   const cartItems = (
     <ul className={Classes["cart-items"]}>
-      {cartItem.map((groupedItems) => (
+      {groupItemsById(ctxt.items).map((groupedItems) => (
         <li className={Classess["cart-item"]} key={groupedItems.id}>
           <div>
             <h2>{groupedItems.name}</h2>
@@ -61,10 +52,10 @@ const Cart = (props) => {
             </div>
           </div>
           <div className={Classess.actions}>
-            <button onClick={() => CartItemRemoveHandler(groupedItems.id)}>
+            <button type="button"  onClick={() => CartItemRemoveHandler(groupedItems.id)}>
               -
             </button>
-            <button onClick={() => CartItemAddHandler(groupedItems.id)}>
+            <button type="button" onClick={() => CartItemAddHandler(groupedItems.id)}>
               +
             </button>
           </div>
