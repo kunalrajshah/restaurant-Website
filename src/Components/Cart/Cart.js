@@ -44,6 +44,7 @@ const Cart = (props) => {
   // For Display message on click order Button
   const orderButtonClickHandler = () => {
     // Simulate order processing
+    ctxt.order();
     setIsOrderPlaced(true);
     setTimeout(() => {
       setIsOrderPlaced(false);

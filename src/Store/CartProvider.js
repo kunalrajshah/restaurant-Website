@@ -38,12 +38,18 @@ const CartProvider = (props) => {
     );
     setItems(updatedCart.filter((item) => item.Quantity > 0));
   };
+
+  // clear cart onclick order
+  const clearCart=()=>{
+    setItems([]);
+  }
   const obj = {
     items: items,
     totalAmount: 0,
     addItem: addItemToCart,
     addItemOnIncrement:IncrementItem,
     removeItem: removeItemFromCart,
+    order:clearCart
   };
   return (
     <CartContext.Provider value={obj}>
