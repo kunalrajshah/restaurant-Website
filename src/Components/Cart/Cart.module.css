@@ -14,6 +14,12 @@
   font-size: 1.5rem;
   margin: 1rem 0;
 }
+.orderMessage {
+  color: green;
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 1rem;
+}
 
 .actions {
   text-align: right;

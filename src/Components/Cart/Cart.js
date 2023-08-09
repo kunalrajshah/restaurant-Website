@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext, useState } from "react";
 import Classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import CartContext from "../../Store/Cart-Context";
@@ -6,6 +6,7 @@ import Classess from "./CartItem.module.css";
 
 const Cart = (props) => {
   const ctxt = useContext(CartContext);
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const hasItem = ctxt.items.length > 0;
 
@@ -40,6 +41,15 @@ const Cart = (props) => {
   });
   const totalAmount = `$${newAmount.toFixed(2)}`;
 
+  // For Display message on click order Button
+  const orderButtonClickHandler = () => {
+    // Simulate order processing
+    setIsOrderPlaced(true);
+    setTimeout(() => {
+      setIsOrderPlaced(false);
+    }, 2000); // Reset order status after 2 seconds
+  };
+
   const cartItems = (
     <ul className={Classes["cart-items"]}>
       {groupItemsById(ctxt.items).map((groupedItems) => (
@@ -52,10 +62,16 @@ const Cart = (props) => {
             </div>
           </div>
           <div className={Classess.actions}>
-            <button type="button"  onClick={() => CartItemRemoveHandler(groupedItems.id)}>
+            <button
+              type="button"
+              onClick={() => CartItemRemoveHandler(groupedItems.id)}
+            >
               -
             </button>
-            <button type="button" onClick={() => CartItemAddHandler(groupedItems.id)}>
+            <button
+              type="button"
+              onClick={() => CartItemAddHandler(groupedItems.id)}
+            >
               +
             </button>
           </div>
@@ -74,8 +90,15 @@ const Cart = (props) => {
         <button className={Classes["button--alt"]} onClick={props.onclose}>
           Close
         </button>
-        {hasItem && <button className={Classes.button}>Order</button>}
+        {hasItem && (
+          <button className={Classes.button} onClick={orderButtonClickHandler}>
+            Order
+          </button>
+        )}
       </div>
+      {isOrderPlaced && (
+        <div className={Classes.orderMessage}>Order Successful!</div>
+      )}
     </Modal>
   );
 };
