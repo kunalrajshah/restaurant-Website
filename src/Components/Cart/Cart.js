@@ -44,7 +44,7 @@ const Cart = (props) => {
 
   // For adding total price
   let newAmount = 0;
-  groupItemsById(ctxt.items).forEach((item) => {
+  cartItem.forEach((item) => {
     newAmount = newAmount + item.price * item.Quantity;
   });
   const totalAmount = `$${newAmount.toFixed(2)}`;
