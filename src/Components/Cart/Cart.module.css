@@ -5,6 +5,11 @@
   max-height: 20rem;
   overflow: scroll;
 }
+.cart-items img {
+  width: 60px; 
+  height: 60px; 
+  margin-right: 10px;
+}
 
 .total {
   display: flex;

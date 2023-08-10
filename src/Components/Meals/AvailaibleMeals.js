@@ -12,8 +12,8 @@ const DUMMY_MEALS = [
   },
   {
     id: "m2",
-    name: "Schnitzel",
-    description: "A german specialty!",
+    name: "Chole Bhature",
+    description: "A Northern areas specialty!",
     price: 10.00,
   },
   {
@@ -26,6 +26,12 @@ const DUMMY_MEALS = [
     id: "m4",
     name: "Green Bowl",
     description: "Healthy...and green...",
+    price: 10.00,
+  },
+  {
+    id: "m5",
+    name: "Aloo Paratha",
+    description: "A potato stuffed flatbread",
     price: 10.00,
   },
 ];

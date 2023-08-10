@@ -3,6 +3,11 @@ import Classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import CartContext from "../../Store/Cart-Context";
 import Classess from "./CartItem.module.css";
+import Litti from '../../assets/litti.jpg';
+import Chole from '../../assets/chole.jpeg';
+import Burger from '../../assets/burger.webp';
+import GreenBowl from '../../assets/green.jpg';
+import Aloo from '../../assets/aloo.jpg';
 
 const Cart = (props) => {
   const ctxt = useContext(CartContext);
@@ -10,6 +15,15 @@ const Cart = (props) => {
 
   const hasItem = ctxt.items.length > 0;
 
+  // For image rendering
+  const mealImage={
+    'Litti and Chokha':Litti,
+    'Chole Bhature':Chole,
+    'Barbecue Burger':Burger,
+    'Green Bowl':GreenBowl,
+    'Aloo Paratha':Aloo
+  }
+  
   // For combined together of the same List
   function groupItemsById(items) {
     const groupedItems = {};
@@ -55,7 +69,7 @@ const Cart = (props) => {
       {groupItemsById(ctxt.items).map((groupedItems) => (
         <li className={Classess["cart-item"]} key={groupedItems.id}>
           <div>
-            <h2>{groupedItems.name}</h2>
+            <h2><img src={mealImage[groupedItems.name]} alt={groupedItems.name} />{groupedItems.name}</h2>
             <div className={Classess.summary}>
               <span className={Classess.price}>{groupedItems.price}</span>
               <span className={Classess.amount}>x {groupedItems.Quantity}</span>
