@@ -43,7 +43,6 @@ const Cart = (props) => {
 
   // For Display message on click order Button
   const orderButtonClickHandler = () => {
-    // Simulate order processing
     ctxt.order();
     setIsOrderPlaced(true);
     setTimeout(() => {
@@ -98,7 +97,9 @@ const Cart = (props) => {
         )}
       </div>
       {isOrderPlaced && (
-        <div className={Classes.orderMessage}>Order Successful!</div>
+        <div className={Classes.orderMessage}>
+          Order Successful!
+        </div>
       )}
     </Modal>
   );

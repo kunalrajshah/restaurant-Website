@@ -58,3 +58,16 @@
     transform: scale(1);
   }
 }
+/* Media query for screens with a maximum width of 768px (typical mobile screens) */
+@media screen and (max-width: 768px) {
+  .button {
+    padding: 0.5rem 2rem;
+    font-size: 14px; /* Adjust font size as needed */
+  }
+
+  .icon {
+    width: 2rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+  }
+}
